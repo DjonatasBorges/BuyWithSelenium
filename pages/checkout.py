@@ -12,14 +12,14 @@ class CheckOut:
         self.webdriver = webdriver
         self.btn_back_home = (By.ID, 'back-to-products')
 
-    def fill_in_checkout_data(self, webdriver, first_name, last_name, postal_code):
+    def fill_in_checkout_data(self, first_name, last_name, postal_code):
         self.webdriver.find_element(*self.first_nameElement).send_keys(first_name)
         self.webdriver.find_element(*self.last_nameElement).send_keys(last_name)
         self.webdriver.find_element(*self.postal_codeElement).send_keys(postal_code)
         self.webdriver.find_element(*self.submit).click()
-        self.webdriver.find_element(*self.final).click()
 
-    def back_to_home(self, webdriver):
+    def back_to_home(self):
+        self.webdriver.find_element(*self.final).click()
         self.webdriver.find_element(*self.btn_back_home).click()
         sleep(3)
         self.webdriver.quit()

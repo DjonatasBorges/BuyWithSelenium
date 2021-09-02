@@ -10,8 +10,8 @@ class Login:
         self.username = 'standard_user'
         self.password = 'secret_sauce'
 
-    def log_in(self):
-        self.webdriver.find_element(*self.usernameElement).send_keys(*self.username)
-        self.webdriver.find_element(*self.passwordElement).send_keys(*self.password)
+    def log_in(self, user, password):
+        self.webdriver.find_element(*self.usernameElement).send_keys(user)
+        self.webdriver.find_element(*self.passwordElement).send_keys(password)
         self.webdriver.find_element(*self.btn_loginElement).click()
 
