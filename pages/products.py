@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
-
 class Products:
     def __init__(self, webdriver):
         self.webdriver = webdriver
@@ -29,6 +28,13 @@ class Products:
 
     def go_to_cart(self):
         self.webdriver.find_element(*self.btn_cartElement).click()
+
+    def conference_go_checkout(self, product_list):
+        produtos = product_list.split(',')
+        for produto in produtos:
+            if produto in self.webdriver.find_element(By.PARTIAL_LINK_TEXT, produto).text:
+                return True
+            return False
 
     def go_to_checkout(self):
         self.webdriver.find_element(*self.btn_checkout).click()

@@ -53,9 +53,10 @@ def page_car(context):
     assert context.driver.current_url in 'https://www.saucedemo.com/cart.html'
 
 
-@when('conferir se os produtos estão no carrinho e ir para o checkout')
-def conference_go_checkout(context):
+@when('conferir se os produtos "{produtos}" estão no carrinho e ir para o checkout')
+def conference_go_checkout(context, produtos):
     context.products = Products(context.driver)
+    context.products.conference_go_checkout(produtos)
     context.products.go_to_checkout()
     sleep(2)
 

@@ -12,7 +12,7 @@ Feature: Fazer uma compra
 
   Scenario: Estar no carrinho de compras, ir para checkout e finalizar a compra.
     Given que esteja na página do carrinho.
-    When conferir se os produtos estão no carrinho e ir para o checkout
+    When conferir se os produtos "Sauce Labs Onesie, Sauce Labs Fleece Jacket" estão no carrinho e ir para o checkout
     And preencher os dados do comprador com "Djonatas", "Borges" e "13670-000"
     Then finalizar a compra e voltar para o home.
 
