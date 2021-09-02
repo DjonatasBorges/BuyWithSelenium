@@ -1,5 +1,6 @@
 from behave import given, when, then
 from pages.login import Login
+from pages.products import Products
 from time import sleep
 
 
@@ -16,10 +17,15 @@ def log_in(context):
     sleep(3)
 
 
-@then(u'Então devo logar no site com sucesso.')
+@then(u'então devo logar no site com sucesso.')
 def confirmed_login(context):
     try:
-        if context.driver.current_url == 'https://www.saucedemo.com/inventory.html':
+        if context.driver.current_url in 'https://www.saucedemo.com/inventory.html':
             print('login efetuado com sucesso.')
     except:
         print('Deu ruim')
+
+    sleep(3)
+
+
+
