@@ -14,7 +14,7 @@ class Products:
         self.btn_cartElement = (By.CSS_SELECTOR, '.shopping_cart_link')
         self.btn_checkout = (By.ID, 'checkout')
 
-    def filter(self, filter_text):
+    def filter_by(self, filter_text):
         dropdown = self.webdriver.find_element(*self.filterElements)
         dd = Select(dropdown)
         dd.select_by_visible_text(filter_text)
