@@ -57,9 +57,13 @@ class OnlyOneProduct:
         for produto in produtos:
             pr1 = produto.lower().lstrip().replace(' ', '-')
             produto_cart = f'add-to-cart-{pr1}'
+            sleep(1)
             self.webdriver.find_element(By.PARTIAL_LINK_TEXT, produto.lstrip()).click()
+            sleep(1)
             self.webdriver.find_element(By.ID, produto_cart).click()
+            sleep(1)
             self.webdriver.find_element(*self.btn_back_to_products).click()
+            sleep(1)
 
     def confirmed_valor(self):
         return self.webdriver.find_element(*self.total_value).text

@@ -8,6 +8,7 @@ from pages.cart import Cart
 from pages.checkout import CheckOut
 from time import sleep
 
+
 @given('que eu esteja na página de login')
 def page_login(context):
     url = 'https://www.saucedemo.com/'
