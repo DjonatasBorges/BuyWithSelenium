@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from behave import given, when, then
 from pages.login import Login
 from pages.products import Products
+from pages.products import OnlyOneProduct
 from pages.cart import Cart
 from pages.checkout import CheckOut
 from time import sleep
@@ -52,15 +53,15 @@ def step_impl(context, filter):
 
 @when(u'clicar e inserir os produtos "{prod}" no carrinho de compras')
 def step_impl(context, prod):
-    context.conference_product = prod
-    context.products.add_to_cart(prod)
+    context.prod = prod
+    context.products.add_to_cart(context.prod)
     sleep(1)
 
 
 @then(u'os produtos estão no carrinho')
 def step_impl(context):
     context.products.go_to_cart()
-    context.products.conference_go_checkout(context.conference_product)
+    context.products.conference_go_checkout(context.prod)
     sleep(1)
 
 
@@ -121,3 +122,17 @@ def step_impl(context):
 def step_impl(context):
     assert context.driver.current_url in 'https://www.saucedemo.com/checkout-complete.html'
     sleep(1)
+
+
+@when(u'clicar, ir e inserir os produtos "{produtos}" no carrinho de compras')
+def step_impl(context, produtos):
+    context.only_product = OnlyOneProduct(context.driver)
+    context.only_product.add_product_to_cart(produtos)
+    context.products = Products(context.driver)
+    context.products.go_to_cart()
+    context.prod = produtos
+
+
+@then(u'valor da compra ser igual a "{valor}"')
+def step_impl(context, valor):
+    assert valor in context.only_product.confirmed_valor()

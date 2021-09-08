@@ -1,5 +1,8 @@
+from time import sleep
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+
 
 class Products:
     def __init__(self, webdriver):
@@ -38,3 +41,25 @@ class Products:
 
     def go_to_checkout(self):
         self.webdriver.find_element(*self.btn_checkout).click()
+
+
+class OnlyOneProduct:
+    def __init__(self, webdriver):
+        self.webdriver = webdriver
+        self.souce_labs_element = (By.XPATH, '//*[@id="item_2_title_link"]/div')
+        self.souce_labs_jacket = (By.XPATH, '//*[@id="item_5_title_link"]/div')
+        self.btn_add_to_cart = (By.PARTIAL_LINK_TEXT, 'Add to cart')
+        self.btn_back_to_products = (By.ID, "back-to-products")
+        self.total_value = (By.XPATH, '//*[@id="checkout_summary_container"]/div/div[2]/div[7]')
+
+    def add_product_to_cart(self, product_list):
+        produtos = product_list.split(',')
+        for produto in produtos:
+            pr1 = produto.lower().lstrip().replace(' ', '-')
+            produto_cart = f'add-to-cart-{pr1}'
+            self.webdriver.find_element(By.PARTIAL_LINK_TEXT, produto.lstrip()).click()
+            self.webdriver.find_element(By.ID, produto_cart).click()
+            self.webdriver.find_element(*self.btn_back_to_products).click()
+
+    def confirmed_valor(self):
+        return self.webdriver.find_element(*self.total_value).text
