@@ -24,4 +24,4 @@ repos:
     rev: ''  # pick a git hash / tag to point to
     hooks:
     -   id: flake8
-        args: [--line-length=120]
+        args: [--max-line-length=120]
